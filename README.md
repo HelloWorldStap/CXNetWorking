@@ -1,2 +1,8 @@
 # CXNetWorking
 基于YYCache和AFNetworking封装的一个网络请求库
+#解决问题
+主要解决的是在一个页面中有多个请求并发问题只需要一个加载框进行加载，全部请求完毕之后统一回调。
+#CXRequest该类是一个传递请求参数的类管理了请求的参数和网络请求以及缓存回调的数据
+首先通过-(instancetype)initWith:(BOOL)openCache方法来进行初始化并告知该对象要不要对数据进行缓存
+appendUrlStr该属性是拼接的参数，param是传入的参数的字典，responseObject是返回的数据可以根据该数据进行界面的处理
+headDic请求头设置请求头，RequestType使用什么样的发送请求
