@@ -16,3 +16,26 @@ headDic请求头设置请求头，RequestType使用什么样的发送请求，NC
 ###管理所存储的缓存的类
 提供了根据所请求的拼接的url和传入的参数作为key来清除缓存并提供了清除缓存之后的回调。
 #特别注意当request的NCopen开启的时候会回调两次第一次是在缓存中获取的数据，第二次是在网络中获取的数据。
+
+    CXRequest *request = [[CXRequest alloc]initWith:YES];
+    request.RequestType =RequestTypeGet;
+    request.NCopen = YES;
+    request.cacheTime = 20;
+    request.appendUrlStr = @"拼接的url";
+    request.param = @{@"key":@"value"};
+    
+    CXRequest *request1 = [[CXRequest alloc]initWith:YES];
+    request1.RequestType = RequestTypeGet;
+    request1.cacheTime = 8;
+    request1.appendUrlStr = @"拼接的url";
+    request1.param =@{@"key":@"value"};
+    
+    
+    [CXBatchNetWorking GroupNetWorking:@[request,request1] NetStates:^(objectType type) {
+        
+    } Success:^(NSArray *resobjarray) {
+        CXRequest *request3 = resobjarray[0];
+        CXRequest *request4 = resobjarray[1];
+    } failure:^(NSError *error) {
+        
+    }];
